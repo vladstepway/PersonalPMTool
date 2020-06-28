@@ -5,6 +5,8 @@ import by.stepovoy.pmtool.exception.ProjectIdException;
 import by.stepovoy.pmtool.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectService {
 
@@ -32,5 +34,9 @@ public class ProjectService {
         }
 
         return project;
+    }
+
+    public List<Project> findAllProjects() {
+        return projectRepository.findAll();
     }
 }
