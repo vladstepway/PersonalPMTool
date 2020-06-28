@@ -1,6 +1,7 @@
 package by.stepovoy.pmtool.service;
 
 import by.stepovoy.pmtool.domain.Project;
+import by.stepovoy.pmtool.exception.ProjectIdException;
 import by.stepovoy.pmtool.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,11 @@ public class ProjectService {
     }
 
     public Project saveOrUpdate(Project project) {
-        return projectRepository.save(project);
+        try {
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepository.save(project);
+        } catch (Exception e) {
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase() + "' already exists");
+        }
     }
 }
