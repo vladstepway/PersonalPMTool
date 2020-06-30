@@ -78,8 +78,6 @@ class AddProject extends Component {
                       name="projectIdentifier"
                       value={this.state.projectIdentifier}
                       onChange={this.onChange}
-
-                      //   {      disabled}
                     />
                     {errors.projectIdentifier && (
                       <div className="invalid-feedback">
@@ -87,7 +85,6 @@ class AddProject extends Component {
                       </div>
                     )}
                   </div>
-                  <p>{errors.projectIdentifier}</p>
 
                   <div className="form-group">
                     <textarea
