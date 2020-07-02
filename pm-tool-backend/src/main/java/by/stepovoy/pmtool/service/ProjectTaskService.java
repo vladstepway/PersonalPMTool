@@ -6,6 +6,8 @@ import by.stepovoy.pmtool.repository.BacklogRepository;
 import by.stepovoy.pmtool.repository.ProjectTaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectTaskService {
 
@@ -38,5 +40,9 @@ public class ProjectTaskService {
             projectTask.setStatus("TO-DO");
         }
         return projectTaskRepository.save(projectTask);
+    }
+
+    public List<ProjectTask> findBacklogById(String backlogId) {
+        return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlogId);
     }
 }
