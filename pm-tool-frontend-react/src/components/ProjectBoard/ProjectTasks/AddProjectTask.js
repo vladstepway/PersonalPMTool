@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {addProjectTask} from "../../../actions/backlogActions";
 import PropTypes from "prop-types"
+import classnames from "classnames";
 
 class AddProjectTask extends Component {
 
@@ -34,14 +35,20 @@ class AddProjectTask extends Component {
             status: this.state.status,
             priority: this.state.priority,
             dueDate: this.state.dueDate,
-            projectIdentifier: this.state.projectIdentifier,
         }
-        this.props.addProjectTask(newProjectTask,)
+        this.props.addProjectTask(this.state.projectIdentifier, newProjectTask, this.props.history)
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.errors) {
+            this.setState({errors: nextProps.errors})
+        }
     }
 
 
     render() {
         const {id} = this.props.match.params;
+        const {errors} = this.state;
         return (
             <div className="add-PBI">
                 <div className="container">
@@ -55,33 +62,61 @@ class AddProjectTask extends Component {
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input type="text"
-                                           className="form-control form-control-lg"
+                                           className={classnames("form-control form-control-lg ", {
+                                               "is-invalid": errors.summary,
+                                           })}
                                            name="summary"
                                            value={this.state.summary}
                                            placeholder="Project Task summary"
                                            onChange={this.onChange}
                                     />
+                                    {errors.summary && (
+                                        <div className="invalid-feedback">
+                                            {errors.summary}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="form-group">
-                                    <textarea className="form-control form-control-lg"
+                                    <textarea className={classnames("form-control form-control-lg ", {
+                                        "is-invalid": errors.acceptanceCriteria,
+                                    })}
                                               placeholder="Acceptance Criteria"
                                               name="acceptanceCriteria"
                                               value={this.state.acceptanceCriteria}
                                               onChange={this.onChange}/>
+                                    {errors.acceptanceCriteria && (
+                                        <div className="invalid-feedback">
+                                            {errors.acceptanceCriteria}
+                                        </div>
+                                    )}
                                 </div>
                                 <h6>Due Date</h6>
                                 <div className="form-group">
                                     <input type="date"
-                                           className="form-control form-control-lg"
+                                           className={classnames("form-control form-control-lg ", {
+                                               "is-invalid": errors.dueDate,
+                                           })}
                                            name="dueDate"
                                            value={this.state.dueDate}
                                            onChange={this.onChange}/>
+                                    {errors.dueDate && (
+                                        <div className="invalid-feedback">
+                                            {errors.dueDate}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="form-group">
-                                    <select className="form-control form-control-lg"
+                                    <select className={classnames("form-control form-control-lg ", {
+                                        "is-invalid": errors.priority,
+                                    })}
                                             name="priority"
                                             value={this.state.priority}
                                             onChange={this.onChange}>
+                                        {errors.priority && (
+                                            <div className="invalid-feedback">
+                                                {errors.priority}
+                                            </div>
+                                        )}
                                         <option value={0}>Select Priority</option>
                                         <option value={1}>High</option>
                                         <option value={2}>Medium</option>
@@ -90,10 +125,17 @@ class AddProjectTask extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <select className="form-control form-control-lg"
+                                    <select className={classnames("form-control form-control-lg ", {
+                                        "is-invalid": errors.status,
+                                    })}
                                             name="status"
                                             value={this.state.status}
                                             onChange={this.onChange}>
+                                        {errors.status && (
+                                            <div className="invalid-feedback">
+                                                {errors.status}
+                                            </div>
+                                        )}
                                         <option value="">Select Status</option>
                                         <option value="TO-DO">TO DO</option>
                                         <option value="IN-PROGRESS">IN PROGRESS</option>
