@@ -87,7 +87,7 @@ public class ProjectTaskService {
 
 
     public ProjectTask updateProjectTaskByProjectSequence(ProjectTask updatedProjectTask, String projectIdentifier, String projectTaskId) {
-        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(updatedProjectTask.getProjectSequence());
+        ProjectTask projectTask = findPTByProjectSequence(projectIdentifier, projectTaskId);
         projectTask = updatedProjectTask;
 
         return projectTaskRepository.save(projectTask);
