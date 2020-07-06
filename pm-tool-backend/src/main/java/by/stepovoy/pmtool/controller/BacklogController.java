@@ -49,4 +49,19 @@ public class BacklogController {
         return new ResponseEntity<>(projectTask, HttpStatus.OK);
     }
 
+    @PatchMapping("/{projectIdentifier}/{projectTaskId}")
+    public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask projectTask, BindingResult result,
+                                               @PathVariable String projectIdentifier, @PathVariable String projectTaskId) {
+        ResponseEntity<?> errorMap = validationErrorService.validate(result);
+        if (errorMap != null) {
+            return errorMap;
+        }
+
+        ProjectTask updatedTask = projectTaskService.updateProjectTaskByProjectSequence(projectTask,
+                projectIdentifier,
+                projectTaskId);
+
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+
+    }
 }
