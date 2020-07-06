@@ -3,6 +3,9 @@ import ProjectTask from "./ProjectTasks/ProjectTask";
 
 class Backlog extends Component {
     render() {
+        // console.log(this.props)
+        const {projectTasks} = this.props;
+        const tasks = projectTasks.map(pt => (<ProjectTask key={pt.id} projectTask={pt}/>));
         return (
             <div className="container">
                 <div className="row">
@@ -12,11 +15,8 @@ class Backlog extends Component {
                                 <h3>TO DO</h3>
                             </div>
                         </div>
-
-                        {/*{!--SAMPLE PROJECT TASK STARTS HERE --}*/}
-                        <ProjectTask/>
-
-                        {/*{!--SAMPLE PROJECT TASK ENDS HERE --}*/}
+                        {tasks}
+                        {/*<ProjectTask/>*/}
                     </div>
                     <div className="col-md-4">
                         <div className="card text-center mb-2">
@@ -24,10 +24,6 @@ class Backlog extends Component {
                                 <h3>In Progress</h3>
                             </div>
                         </div>
-                        <ProjectTask/>
-                        {/*{ <!-- SAMPLE PROJECT TASK STARTS HERE -->}*/}
-
-                        {/*{ <!-- SAMPLE PROJECT TASK ENDS HERE -->}*/}
                     </div>
                     <div className="col-md-4">
                         <div className="card text-center mb-2">
@@ -35,10 +31,6 @@ class Backlog extends Component {
                                 <h3>Done</h3>
                             </div>
                         </div>
-                        <ProjectTask/>
-                        {/*{ <!-- SAMPLE PROJECT TASK STARTS HERE -->*/}
-
-                        {/*    <!-- SAMPLE PROJECT TASK ENDS HERE -->}*/}
                     </div>
                 </div>
             </div>
