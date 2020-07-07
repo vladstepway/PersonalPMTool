@@ -2,18 +2,74 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import classnames from "classnames";
 import {connect} from "react-redux";
-import {getProjectTask} from "../../../actions/backlogActions";
+import {updateProjectTask, getProjectTask} from "../../../actions/backlogActions";
 import PropTypes from "prop-types"
 
 class UpdateProjectTask extends Component {
 
+    onChange(e) {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        const updatedProjectTask = {
+            id: this.state.id,
+            summary: this.state.summary,
+            projectSequence: this.state.projectSequence,
+            acceptanceCriteria: this.state.acceptanceCriteria,
+            status: this.state.status,
+            priority: this.state.priority,
+            dueDate: this.state.dueDate,
+            projectIdentifier: this.state.projectIdentifier,
+            createdAt: this.state.createdAt,
+        };
+        this.props.updateProjectTask(this.state.projectIdentifier, this.state.projectSequence, updatedProjectTask, this.props.history);
+    }
+
     constructor() {
         super();
         this.state = {
+            id: "",
+            summary: "",
+            projectSequence: "",
+            acceptanceCriteria: "",
+            status: "",
+            priority: 0,
+            dueDate: "",
+            projectIdentifier: "",
+            createdAt: "",
             errors: {}
         }
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        const {
+            id,
+            summary,
+            projectSequence,
+            acceptanceCriteria,
+            status,
+            priority,
+            dueDate,
+            projectIdentifier,
+            createdAt,
+        } = nextProps.projectTask;
+
+        this.setState({
+            id,
+            summary,
+            projectSequence,
+            acceptanceCriteria,
+            status,
+            priority,
+            dueDate,
+            projectIdentifier,
+            createdAt,
+        });
+    }
 
     componentDidMount() {
         const {backlogId, projectTaskId} = this.props.match.params;
@@ -21,7 +77,6 @@ class UpdateProjectTask extends Component {
     }
 
     render() {
-        const {backlogId} = this.props.match.params;
         const {errors} = this.state;
 
         return (
@@ -29,11 +84,12 @@ class UpdateProjectTask extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <Link to={`/project-board/${backlogId}`} className="btn btn-light">
+                            <Link to={`/project-board/${this.state.projectIdentifier}`} className="btn btn-light">
                                 Back to Project Board
                             </Link>
                             <h4 className="display-4 text-center">Update Project Task</h4>
-                            <p className="lead text-center">Project Name + Project Code</p>
+                            <p className="lead text-center">Project name : {this.state.projectIdentifier} <br/> Project
+                                task ID : {this.state.projectSequence}</p>
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input type="text"
@@ -43,7 +99,7 @@ class UpdateProjectTask extends Component {
                                            name="summary"
                                            value={this.state.summary}
                                            placeholder="Project Task summary"
-                                           // onChange={this.onChange}
+                                           onChange={this.onChange}
                                     />
                                     {/*{errors.summary && (*/}
                                     {/*    <div className="invalid-feedback">*/}
@@ -58,7 +114,7 @@ class UpdateProjectTask extends Component {
                                               placeholder="Acceptance Criteria"
                                               name="acceptanceCriteria"
                                               value={this.state.acceptanceCriteria}
-                                              // onChange={this.onChange}
+                                              onChange={this.onChange}
                                     />
                                     {/*{errors.acceptanceCriteria && (*/}
                                     {/*    <div className="invalid-feedback">*/}
@@ -74,7 +130,7 @@ class UpdateProjectTask extends Component {
                                            })}
                                            name="dueDate"
                                            value={this.state.dueDate}
-                                           // onChange={this.onChange}
+                                           onChange={this.onChange}
                                     />
                                     {/*{errors.dueDate && (*/}
                                     {/*    <div className="invalid-feedback">*/}
@@ -88,7 +144,7 @@ class UpdateProjectTask extends Component {
                                     })}
                                             name="priority"
                                             value={this.state.priority}
-                                            // onChange={this.onChange}
+                                            onChange={this.onChange}
                                     >
                                         {/*{errors.priority && (*/}
                                         {/*    <div className="invalid-feedback">*/}
@@ -108,7 +164,7 @@ class UpdateProjectTask extends Component {
                                     })}
                                             name="status"
                                             value={this.state.status}
-                                            // onChange={this.onChange}
+                                            onChange={this.onChange}
                                     >
                                         {/*{errors.status && (*/}
                                         {/*    <div className="invalid-feedback">*/}
@@ -134,11 +190,14 @@ class UpdateProjectTask extends Component {
 
 UpdateProjectTask.propTypes = {
     getProjectTask: PropTypes.func.isRequired,
-    projectTask: PropTypes.object.isRequired
+    projectTask: PropTypes.object.isRequired,
+    updateProjectTask: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    projectTask: state.backlog.projectTask
+    projectTask: state.backlog.projectTask,
+    errors: state.errors,
 })
 
-export default connect(mapStateToProps, {getProjectTask})(UpdateProjectTask);
+export default connect(mapStateToProps, {getProjectTask, updateProjectTask})(UpdateProjectTask);
