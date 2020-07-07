@@ -19,10 +19,10 @@ class App extends Component {
                 <Router>
                     <div className="App">
                         <Header/>
-                        <Route exact path="/projects" component={Dashboard}/>
+                        <Route exact path="/dashboard" component={Dashboard}/>
                         <Route exact path="/projects/add" component={AddProject}/>
                         <Route exact path="/projects/:id/update" component={UpdateProject}/>
-                        <Route exact path="/projects/:id" component={ProjectBoard}/>
+                        <Route exact path="/project-board/:id" component={ProjectBoard}/>
                         <Route exact path="/projects/:id/tasks/add" component={AddProjectTask}/>
                         <Route exact path="/projects/:backlogId/tasks/:projectTaskId/update" component={UpdateProjectTask}/>
                     </div>

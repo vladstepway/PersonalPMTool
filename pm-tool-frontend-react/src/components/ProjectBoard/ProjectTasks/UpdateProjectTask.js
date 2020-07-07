@@ -29,7 +29,7 @@ class UpdateProjectTask extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <Link to={`/projects/${backlogId}`} className="btn btn-light">
+                            <Link to={`/project-board/${backlogId}`} className="btn btn-light">
                                 Back to Project Board
                             </Link>
                             <h4 className="display-4 text-center">Update Project Task</h4>
