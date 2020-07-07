@@ -46,6 +46,11 @@ class UpdateProjectTask extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+
+        if (nextProps.errors) {
+            this.setState({errors: nextProps.errors})
+        }
+
         const {
             id,
             summary,
@@ -94,63 +99,63 @@ class UpdateProjectTask extends Component {
                                 <div className="form-group">
                                     <input type="text"
                                            className={classnames("form-control form-control-lg ", {
-                                               // "is-invalid": errors.summary,
+                                               "is-invalid": errors.summary,
                                            })}
                                            name="summary"
                                            value={this.state.summary}
                                            placeholder="Project Task summary"
                                            onChange={this.onChange}
                                     />
-                                    {/*{errors.summary && (*/}
-                                    {/*    <div className="invalid-feedback">*/}
-                                    {/*        {errors.summary}*/}
-                                    {/*    </div>*/}
-                                    {/*)}*/}
+                                    {errors.summary && (
+                                        <div className="invalid-feedback">
+                                            {errors.summary}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="form-group">
                                     <textarea className={classnames("form-control form-control-lg ", {
-                                        // "is-invalid": errors.acceptanceCriteria,
+                                        "is-invalid": errors.acceptanceCriteria,
                                     })}
                                               placeholder="Acceptance Criteria"
                                               name="acceptanceCriteria"
                                               value={this.state.acceptanceCriteria}
                                               onChange={this.onChange}
                                     />
-                                    {/*{errors.acceptanceCriteria && (*/}
-                                    {/*    <div className="invalid-feedback">*/}
-                                    {/*        {errors.acceptanceCriteria}*/}
-                                    {/*    </div>*/}
-                                    {/*)}*/}
+                                    {errors.acceptanceCriteria && (
+                                        <div className="invalid-feedback">
+                                            {errors.acceptanceCriteria}
+                                        </div>
+                                    )}
                                 </div>
                                 <h6>Due Date</h6>
                                 <div className="form-group">
                                     <input type="date"
                                            className={classnames("form-control form-control-lg ", {
-                                               // "is-invalid": errors.dueDate,
+                                               "is-invalid": errors.dueDate,
                                            })}
                                            name="dueDate"
                                            value={this.state.dueDate}
                                            onChange={this.onChange}
                                     />
-                                    {/*{errors.dueDate && (*/}
-                                    {/*    <div className="invalid-feedback">*/}
-                                    {/*        {errors.dueDate}*/}
-                                    {/*    </div>*/}
-                                    {/*)}*/}
+                                    {errors.dueDate && (
+                                        <div className="invalid-feedback">
+                                            {errors.dueDate}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="form-group">
                                     <select className={classnames("form-control form-control-lg ", {
-                                        // "is-invalid": errors.priority,
+                                        "is-invalid": errors.priority,
                                     })}
                                             name="priority"
                                             value={this.state.priority}
                                             onChange={this.onChange}
                                     >
-                                        {/*{errors.priority && (*/}
-                                        {/*    <div className="invalid-feedback">*/}
-                                        {/*        {errors.priority}*/}
-                                        {/*    </div>*/}
-                                        {/*)}*/}
+                                        {errors.priority && (
+                                            <div className="invalid-feedback">
+                                                {errors.priority}
+                                            </div>
+                                        )}
                                         <option value={0}>Select Priority</option>
                                         <option value={1}>High</option>
                                         <option value={2}>Medium</option>
@@ -160,17 +165,17 @@ class UpdateProjectTask extends Component {
 
                                 <div className="form-group">
                                     <select className={classnames("form-control form-control-lg ", {
-                                        // "is-invalid": errors.status,
+                                        "is-invalid": errors.status,
                                     })}
                                             name="status"
                                             value={this.state.status}
                                             onChange={this.onChange}
                                     >
-                                        {/*{errors.status && (*/}
-                                        {/*    <div className="invalid-feedback">*/}
-                                        {/*        {errors.status}*/}
-                                        {/*    </div>*/}
-                                        {/*)}*/}
+                                        {errors.status && (
+                                            <div className="invalid-feedback">
+                                                {errors.status}
+                                            </div>
+                                        )}
                                         <option value="">Select Status</option>
                                         <option value="TO-DO">TO DO</option>
                                         <option value="IN-PROGRESS">IN PROGRESS</option>
