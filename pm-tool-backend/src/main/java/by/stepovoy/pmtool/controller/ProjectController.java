@@ -40,13 +40,13 @@ public class ProjectController {
             return errorMap;
         }
 
-        Project project1 = projectService.saveOrUpdate(project,principal.getName());
+        Project project1 = projectService.saveOrUpdate(project, principal.getName());
         return new ResponseEntity<>(project, HttpStatus.CREATED);
     }
 
     @GetMapping("/{projectId}")
     public ResponseEntity<?> getProjectById(@PathVariable String projectId, Principal principal) {
-        Project project = projectService.findProjectByIdentifier(projectId,principal.getName());
+        Project project = projectService.findProjectByIdentifier(projectId, principal.getName());
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
 
@@ -56,8 +56,8 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<?> deleteProjectById(@PathVariable String projectId,Principal principal) {
-        projectService.deleteProjectByIdentifier(projectId,principal.getName());
+    public ResponseEntity<?> deleteProjectById(@PathVariable String projectId, Principal principal) {
+        projectService.deleteProjectByIdentifier(projectId, principal.getName());
         return new ResponseEntity<>("Project with ID: '" + projectId + "' was deleted", HttpStatus.OK);
     }
 }
