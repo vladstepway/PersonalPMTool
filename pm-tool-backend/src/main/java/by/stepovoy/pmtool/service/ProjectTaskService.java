@@ -88,8 +88,8 @@ public class ProjectTaskService {
         return projectTaskRepository.save(projectTask);
     }
 
-    public void deleteProjectTaskByProjectSequence(String projectIdentifier, String projectTaskId) {
-        ProjectTask projectTask = findPTByProjectSequence(projectIdentifier, projectTaskId);
+    public void deleteProjectTaskByProjectSequence(String projectIdentifier, String projectTaskId, String username) {
+        ProjectTask projectTask = findPTByProjectSequence(projectIdentifier, projectTaskId, username);
         projectTaskRepository.delete(projectTask);
     }
 }
