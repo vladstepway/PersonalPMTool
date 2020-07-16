@@ -13,4 +13,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     @Override
     List<Project> findAll();
+
+    List<Project> findAllByProjectLeader(String username);
 }
