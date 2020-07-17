@@ -14,7 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static by.stepovoy.pmtool.security.SecurityConstants.*;
+import static by.stepovoy.pmtool.security.SecurityConstants.H2_URL;
+import static by.stepovoy.pmtool.security.SecurityConstants.SIGN_UP_URL;
 
 @Configuration
 @EnableWebSecurity
