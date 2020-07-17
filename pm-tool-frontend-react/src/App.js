@@ -11,6 +11,9 @@ import UpdateProject from "./components/Project/UpdateProject";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
 import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
+import Landing from "./components/Layout/Landing";
+import Register from "./components/UserManagement/Register";
+import Login from "./components/UserManagement/Login";
 
 class App extends Component {
     render() {
@@ -19,12 +22,24 @@ class App extends Component {
                 <Router>
                     <div className="App">
                         <Header/>
+
+                        {
+                            //public routes
+                        }
+                        <Route exact path="/" component={Landing}/>
+                        <Route exact path="/register" component={Register}/>
+                        <Route exact path="/login" component={Login}/>
+
+                        {
+                            //Private routes
+                        }
                         <Route exact path="/dashboard" component={Dashboard}/>
                         <Route exact path="/projects/add" component={AddProject}/>
                         <Route exact path="/projects/:id/update" component={UpdateProject}/>
                         <Route exact path="/project-board/:id" component={ProjectBoard}/>
                         <Route exact path="/projects/:id/tasks/add" component={AddProjectTask}/>
-                        <Route exact path="/projects/:backlogId/tasks/:projectTaskId/update" component={UpdateProjectTask}/>
+                        <Route exact path="/projects/:backlogId/tasks/:projectTaskId/update"
+                               component={UpdateProjectTask}/>
                     </div>
                 </Router>
             </Provider>
