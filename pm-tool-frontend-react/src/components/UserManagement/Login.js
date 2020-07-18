@@ -17,6 +17,15 @@ class Login extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.security.isAuth) {
+            this.props.history.push("/dashboard")
+        }
+        if (nextProps.errors) {
+            this.setState({errors: nextProps.errors})
+        }
+    }
+
     onSubmit(e) {
         e.preventDefault();
         const loginRequest = {
@@ -82,7 +91,8 @@ class Login extends Component {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    security: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
