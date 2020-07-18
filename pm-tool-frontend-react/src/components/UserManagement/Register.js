@@ -19,6 +19,7 @@ class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+//TODO replace with actual(deprecated)
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({errors: nextProps.errors})
@@ -68,7 +69,7 @@ class Register extends Component {
                                     )}
                                 </div>
                                 <div className="form-group">
-                                    <input type="email"
+                                    <input type="text"
                                            className={classnames("form-control form-control-lg ", {
                                                "is-invalid": errors.username,
                                            })}
