@@ -1,5 +1,6 @@
 package by.stepovoy.pmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
     private Integer priority;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -40,7 +42,9 @@ public class ProjectTask {
     private Backlog backlog;
     @Column(updatable = false)
     private String projectIdentifier;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
     @PrePersist

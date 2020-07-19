@@ -1,5 +1,6 @@
 package by.stepovoy.pmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +44,9 @@ public class User implements UserDetails {
     private String password;
     @Transient
     private String confirmPassword;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
